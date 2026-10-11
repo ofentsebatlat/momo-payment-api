@@ -1,0 +1,9 @@
+[
+  {
+    "id": "2fc319e6-e38b-45eb-9eba-15f4a9e6219f",
+    "receivedAt": "2026-03-26T11:36:40.084Z",
+    "name": "Test User",
+    "email": "test@example.com",
+    "message": "Hello from API test"
+  }
+]

@@ -1,0 +1,820 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="A portfolio for an inspiring tech enthusiast—projects, skills, and ways to connect." />
+  <title>Ada Tech — Portfolio</title>
+
+  <style>
+    :root {
+      color-scheme: light dark;
+
+      --bg: #070a12;
+      --panel: rgba(255, 255, 255, 0.06);
+      --panel-2: rgba(255, 255, 255, 0.085);
+      --text: rgba(255, 255, 255, 0.92);
+      --muted: rgba(255, 255, 255, 0.68);
+      --border: rgba(255, 255, 255, 0.12);
+      --shadow: 0 18px 60px rgba(0, 0, 0, 0.45);
+
+      --brand: #7c5cff;
+      --brand-2: #33d6ff;
+      --brand-3: #ff63d6;
+
+      --radius: 18px;
+      --radius-sm: 14px;
+
+      --max: 1120px;
+      --pad: 22px;
+      --pad-lg: 34px;
+
+      --ring: 0 0 0 4px rgba(124, 92, 255, 0.25);
+    }
+
+    html[data-theme="light"] {
+      color-scheme: light;
+      --bg: #f6f7fb;
+      --panel: rgba(10, 14, 30, 0.04);
+      --panel-2: rgba(10, 14, 30, 0.055);
+      --text: rgba(10, 14, 30, 0.92);
+      --muted: rgba(10, 14, 30, 0.66);
+      --border: rgba(10, 14, 30, 0.12);
+      --shadow: 0 18px 60px rgba(12, 18, 34, 0.14);
+      --ring: 0 0 0 4px rgba(124, 92, 255, 0.18);
+    }
+
+    * { box-sizing: border-box; }
+    html, body { height: 100%; }
+
+    body {
+      margin: 0;
+      font: 16px/1.55 system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(1200px 800px at 12% 10%, rgba(124, 92, 255, 0.28), transparent 62%),
+        radial-gradient(1200px 800px at 88% 18%, rgba(51, 214, 255, 0.18), transparent 60%),
+        radial-gradient(900px 700px at 50% 100%, rgba(255, 99, 214, 0.14), transparent 62%),
+        var(--bg);
+    }
+
+    a { color: inherit; text-decoration: none; }
+    a:hover { text-decoration: underline; text-underline-offset: 4px; }
+
+    ::selection { background: rgba(124, 92, 255, 0.35); }
+
+    .skip {
+      position: absolute;
+      left: 12px;
+      top: 12px;
+      padding: 10px 12px;
+      border-radius: 12px;
+      background: var(--panel-2);
+      border: 1px solid var(--border);
+      transform: translateY(-160%);
+      transition: transform 160ms ease;
+      z-index: 1000;
+    }
+    .skip:focus { transform: translateY(0); outline: none; box-shadow: var(--ring); }
+
+    .container {
+      width: min(var(--max), 100%);
+      margin: 0 auto;
+      padding: 0 16px;
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      backdrop-filter: blur(10px);
+      background: linear-gradient(to bottom, rgba(0,0,0,0.38), rgba(0,0,0,0.14));
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    }
+    html[data-theme="light"] header {
+      background: linear-gradient(to bottom, rgba(246,247,251,0.85), rgba(246,247,251,0.60));
+      border-bottom: 1px solid rgba(10, 14, 30, 0.10);
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 12px 0;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+    }
+
+    .logo {
+      width: 36px;
+      height: 36px;
+      border-radius: 12px;
+      background: linear-gradient(135deg, rgba(124,92,255,0.95), rgba(51,214,255,0.65), rgba(255,99,214,0.75));
+      box-shadow: 0 14px 40px rgba(124, 92, 255, 0.18);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+    }
+
+    .navlinks {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: flex-end;
+    }
+
+    .pill {
+      padding: 10px 12px;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      background: rgba(255,255,255,0.04);
+      color: var(--muted);
+      text-decoration: none;
+      font-weight: 650;
+      font-size: 14px;
+      transition: transform 140ms ease, background 140ms ease, border-color 140ms ease;
+    }
+
+    .pill:hover {
+      text-decoration: none;
+      color: var(--text);
+      background: rgba(255,255,255,0.07);
+      transform: translateY(-1px);
+      border-color: rgba(255,255,255,0.18);
+    }
+    .pill:focus-visible { outline: none; box-shadow: var(--ring); }
+
+    .pill.primary {
+      background: linear-gradient(135deg, rgba(124, 92, 255, 0.95), rgba(51, 214, 255, 0.55));
+      border-color: rgba(255, 255, 255, 0.18);
+      color: white;
+      box-shadow: 0 14px 40px rgba(124, 92, 255, 0.20);
+    }
+
+    .hero {
+      padding: 54px 0 28px;
+    }
+
+    .grid-hero {
+      display: grid;
+      grid-template-columns: 1.25fr 0.75fr;
+      gap: 18px;
+      align-items: start;
+    }
+
+    @media (max-width: 920px) {
+      .grid-hero { grid-template-columns: 1fr; }
+    }
+
+    .card {
+      border: 1px solid var(--border);
+      background: var(--panel);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+    }
+
+    .card.pad { padding: var(--pad-lg); }
+    .card.pad-sm { padding: var(--pad); border-radius: var(--radius-sm); }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      color: var(--muted);
+      font-weight: 700;
+      letter-spacing: 0.02em;
+      font-size: 13px;
+      text-transform: uppercase;
+    }
+
+    .dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 999px;
+      background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.95), rgba(255,255,255,0.1));
+      box-shadow: 0 0 0 3px rgba(124, 92, 255, 0.25);
+    }
+
+    h1 {
+      margin: 14px 0 10px;
+      font-size: clamp(34px, 5vw, 56px);
+      letter-spacing: -0.03em;
+      line-height: 1.05;
+    }
+
+    .lead {
+      margin: 0;
+      color: var(--muted);
+      font-size: 16px;
+      max-width: 72ch;
+    }
+
+    .actions {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-top: 18px;
+    }
+
+    .chips {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-top: 18px;
+    }
+    .chip {
+      border: 1px solid var(--border);
+      background: rgba(255,255,255,0.04);
+      color: var(--muted);
+      padding: 8px 10px;
+      border-radius: 999px;
+      font-weight: 650;
+      font-size: 13px;
+    }
+
+    .profile {
+      display: grid;
+      gap: 12px;
+    }
+
+    .avatar {
+      aspect-ratio: 1 / 1;
+      border-radius: var(--radius);
+      background:
+        radial-gradient(120px 120px at 30% 25%, rgba(255,255,255,0.14), transparent 70%),
+        linear-gradient(135deg, rgba(124,92,255,0.6), rgba(51,214,255,0.22), rgba(255,99,214,0.28));
+      border: 1px solid rgba(255,255,255,0.16);
+      box-shadow: 0 18px 70px rgba(0,0,0,0.35);
+      display: grid;
+      place-items: center;
+      overflow: hidden;
+      min-height: 220px;
+    }
+
+    .avatar svg {
+      width: 62%;
+      height: auto;
+      opacity: 0.92;
+      filter: drop-shadow(0 18px 40px rgba(0,0,0,0.28));
+    }
+
+    .statgrid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+    }
+    @media (max-width: 420px) {
+      .statgrid { grid-template-columns: 1fr; }
+    }
+    .stat .k {
+      font-weight: 900;
+      font-size: 18px;
+      letter-spacing: -0.01em;
+    }
+    .stat .v {
+      color: var(--muted);
+      font-weight: 650;
+      font-size: 13px;
+      margin-top: 4px;
+    }
+
+    main { padding-bottom: 64px; }
+
+    .section {
+      margin-top: 16px;
+      padding: 18px 0;
+    }
+
+    .section h2 {
+      margin: 0 0 10px;
+      font-size: 22px;
+      letter-spacing: -0.02em;
+    }
+    .section p { margin: 0; color: var(--muted); }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+      margin-top: 12px;
+    }
+    @media (max-width: 860px) {
+      .grid-2 { grid-template-columns: 1fr; }
+    }
+
+    .projects {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+      margin-top: 12px;
+    }
+    @media (max-width: 980px) {
+      .projects { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 640px) {
+      .projects { grid-template-columns: 1fr; }
+    }
+
+    .project h3 { margin: 0 0 6px; font-size: 16px; letter-spacing: -0.01em; }
+    .meta {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-top: 12px;
+    }
+    .tag {
+      font-size: 12px;
+      font-weight: 750;
+      letter-spacing: 0.01em;
+      color: var(--muted);
+      padding: 6px 9px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid var(--border);
+    }
+
+    .row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      margin-top: 12px;
+    }
+    .row a {
+      color: rgba(255,255,255,0.9);
+      font-weight: 750;
+    }
+    html[data-theme="light"] .row a { color: rgba(10,14,30,0.9); }
+
+    .list {
+      margin: 12px 0 0;
+      padding-left: 18px;
+      color: var(--muted);
+    }
+    .list li { margin: 8px 0; }
+
+    .timeline {
+      margin-top: 12px;
+      display: grid;
+      gap: 10px;
+    }
+    .titem {
+      display: grid;
+      grid-template-columns: 120px 1fr;
+      gap: 12px;
+      align-items: start;
+    }
+    @media (max-width: 520px) {
+      .titem { grid-template-columns: 1fr; }
+    }
+    .twhen { color: var(--muted); font-weight: 750; font-size: 13px; }
+    .twhat h3 { margin: 0 0 4px; font-size: 15px; }
+    .twhat p { margin: 0; }
+
+    .form {
+      display: grid;
+      gap: 10px;
+      margin-top: 12px;
+    }
+    label { font-weight: 750; font-size: 13px; color: var(--muted); }
+    input, textarea {
+      width: 100%;
+      padding: 12px 12px;
+      border-radius: 14px;
+      border: 1px solid var(--border);
+      background: rgba(255,255,255,0.04);
+      color: var(--text);
+      outline: none;
+      font: inherit;
+    }
+    textarea { min-height: 120px; resize: vertical; }
+    input:focus, textarea:focus { box-shadow: var(--ring); border-color: rgba(124, 92, 255, 0.55); }
+
+    footer {
+      padding: 24px 0 46px;
+      color: var(--muted);
+    }
+
+    .small { font-size: 13px; color: var(--muted); }
+    .kbd {
+      font: 12px/1.2 ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      padding: 3px 6px;
+      border: 1px solid var(--border);
+      border-bottom-color: rgba(255,255,255,0.20);
+      border-radius: 8px;
+      background: rgba(255,255,255,0.04);
+      color: var(--muted);
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      * { scroll-behavior: auto !important; transition: none !important; animation: none !important; }
+    }
+  </style>
+</head>
+
+<body>
+  <a class="skip" href="#content">Skip to content</a>
+
+  <header>
+    <div class="container">
+      <div class="nav" role="navigation" aria-label="Primary">
+        <a class="brand" href="#top" aria-label="Go to top">
+          <span class="logo" aria-hidden="true"></span>
+          <span>Ada Tech</span>
+        </a>
+
+        <nav class="navlinks" aria-label="Sections">
+          <a class="pill" href="#about">About</a>
+          <a class="pill" href="#projects">Projects</a>
+          <a class="pill" href="#skills">Skills</a>
+          <a class="pill" href="#journey">Journey</a>
+          <a class="pill" href="#contact">Contact</a>
+          <button id="themeBtn" class="pill primary" type="button" aria-label="Toggle theme">
+            Theme <span class="kbd" aria-hidden="true">T</span>
+          </button>
+        </nav>
+      </div>
+    </div>
+  </header>
+
+  <main id="content">
+    <section id="top" class="hero">
+      <div class="container">
+        <div class="grid-hero">
+          <div class="card pad">
+            <div class="eyebrow"><span class="dot" aria-hidden="true"></span> Curious builder • lifelong learner</div>
+            <h1>Turning ideas into useful software—with clarity, craft, and courage.</h1>
+            <p class="lead">
+              I’m <strong>Ada</strong>, an inspiring tech enthusiast who loves shipping small experiments, learning in public,
+              and using technology to make everyday life a little easier. I focus on clean UX, thoughtful engineering, and steady iteration.
+            </p>
+
+            <div class="actions">
+              <a class="pill primary" href="#projects">Explore projects</a>
+              <a class="pill" href="#contact">Say hello</a>
+              <a class="pill" href="#" aria-label="Download resume (replace link)">Download résumé</a>
+            </div>
+
+            <div class="chips" aria-label="Highlights">
+              <span class="chip">Problem solver</span>
+              <span class="chip">Frontend + Backend</span>
+              <span class="chip">AI-curious</span>
+              <span class="chip">Community-driven</span>
+            </div>
+          </div>
+
+          <aside class="profile">
+            <div class="card pad-sm avatar" aria-label="Profile illustration">
+              <svg viewBox="0 0 240 240" role="img" aria-label="Abstract tech emblem">
+                <defs>
+                  <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+                    <stop offset="0" stop-color="rgba(255,255,255,0.92)" />
+                    <stop offset="1" stop-color="rgba(255,255,255,0.35)" />
+                  </linearGradient>
+                </defs>
+                <path fill="url(#g)" d="M120 18c56.3 0 102 45.7 102 102s-45.7 102-102 102S18 176.3 18 120 63.7 18 120 18Zm0 28c-40.9 0-74 33.1-74 74s33.1 74 74 74 74-33.1 74-74-33.1-74-74-74Z"/>
+                <path fill="rgba(255,255,255,0.18)" d="M70 120c0-27.6 22.4-50 50-50s50 22.4 50 50-22.4 50-50 50-50-22.4-50-50Z"/>
+                <path fill="rgba(255,255,255,0.40)" d="M120 88c17.7 0 32 14.3 32 32s-14.3 32-32 32-32-14.3-32-32 14.3-32 32-32Z"/>
+              </svg>
+            </div>
+
+            <div class="card pad-sm">
+              <div class="statgrid" aria-label="Quick stats">
+                <div class="stat">
+                  <div class="k">12+</div>
+                  <div class="v">Projects shipped</div>
+                </div>
+                <div class="stat">
+                  <div class="k">4</div>
+                  <div class="v">Hackathons</div>
+                </div>
+                <div class="stat">
+                  <div class="k">∞</div>
+                  <div class="v">Curiosity</div>
+                </div>
+              </div>
+              <p class="small" style="margin: 12px 0 0;">
+                Tip: press <span class="kbd">T</span> to toggle theme.
+              </p>
+            </div>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+    <section id="about" class="section">
+      <div class="container">
+        <div class="grid-2">
+          <div class="card pad">
+            <h2>About</h2>
+            <p>
+              I’m driven by that “spark” moment when a concept turns into a real thing people can use.
+              I enjoy building end‑to‑end: designing the interface, shaping the data, and polishing the details.
+            </p>
+            <ul class="list">
+              <li><strong>What I value:</strong> clarity, kindness, and momentum.</li>
+              <li><strong>What I’m exploring:</strong> accessible design, performance, and AI‑assisted workflows.</li>
+              <li><strong>What I’m aiming for:</strong> software that feels simple because it’s thoughtfully made.</li>
+            </ul>
+          </div>
+
+          <div class="card pad">
+            <h2>Now</h2>
+            <p>
+              Currently building small tools, writing quick notes about what I learn, and looking for opportunities to contribute to meaningful products.
+            </p>
+            <div class="meta" aria-label="Current focus tags">
+              <span class="tag">Learning by shipping</span>
+              <span class="tag">UX polish</span>
+              <span class="tag">API design</span>
+              <span class="tag">Testing habits</span>
+              <span class="tag">Community</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="projects" class="section">
+      <div class="container">
+        <div class="card pad">
+          <h2>Featured projects</h2>
+          <p>Replace these cards with your real projects and links. Each one is written to sound confident and inspiring.</p>
+
+          <div class="projects" style="margin-top: 16px;">
+            <article class="card pad-sm project">
+              <h3>Pulse Planner</h3>
+              <p>A lightweight planner that turns goals into tiny, daily steps with reminders and streaks.</p>
+              <div class="meta">
+                <span class="tag">HTML/CSS</span><span class="tag">JavaScript</span><span class="tag">UX</span>
+              </div>
+              <div class="row">
+                <a href="#" aria-label="Open Pulse Planner demo (replace link)">Live</a>
+                <a href="#" aria-label="Open Pulse Planner source (replace link)">Code</a>
+              </div>
+            </article>
+
+            <article class="card pad-sm project">
+              <h3>KindCart</h3>
+              <p>A budget-friendly shopping list that suggests swaps and tracks prices over time.</p>
+              <div class="meta">
+                <span class="tag">Frontend</span><span class="tag">APIs</span><span class="tag">Data</span>
+              </div>
+              <div class="row">
+                <a href="#" aria-label="Open KindCart demo (replace link)">Live</a>
+                <a href="#" aria-label="Open KindCart source (replace link)">Code</a>
+              </div>
+            </article>
+
+            <article class="card pad-sm project">
+              <h3>DevNotes</h3>
+              <p>A clean, searchable “learning log” that helps you remember what you build and why.</p>
+              <div class="meta">
+                <span class="tag">Markdown</span><span class="tag">Search</span><span class="tag">Performance</span>
+              </div>
+              <div class="row">
+                <a href="#" aria-label="Open DevNotes demo (replace link)">Live</a>
+                <a href="#" aria-label="Open DevNotes source (replace link)">Code</a>
+              </div>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="skills" class="section">
+      <div class="container">
+        <div class="grid-2">
+          <div class="card pad">
+            <h2>Skills</h2>
+            <p>Balanced skills: build quickly, then refine thoughtfully.</p>
+            <div class="meta" style="margin-top: 16px;">
+              <span class="tag">HTML</span>
+              <span class="tag">CSS</span>
+              <span class="tag">JavaScript</span>
+              <span class="tag">React</span>
+              <span class="tag">Node.js</span>
+              <span class="tag">SQL</span>
+              <span class="tag">Git</span>
+              <span class="tag">Testing</span>
+              <span class="tag">Accessibility</span>
+            </div>
+          </div>
+
+          <div class="card pad">
+            <h2>Principles</h2>
+            <ul class="list">
+              <li><strong>Start small:</strong> define the smallest useful version, then iterate.</li>
+              <li><strong>Make it readable:</strong> naming and structure are features.</li>
+              <li><strong>Design for humans:</strong> accessibility and clarity first.</li>
+              <li><strong>Measure:</strong> performance and reliability matter.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="journey" class="section">
+      <div class="container">
+        <div class="card pad">
+          <h2>Journey</h2>
+          <p>A short timeline you can adapt to your real milestones.</p>
+
+          <div class="timeline">
+            <div class="card pad-sm titem">
+              <div class="twhen">2026 • Now</div>
+              <div class="twhat">
+                <h3>Building in public</h3>
+                <p>Shipping small projects weekly and sharing what I learn along the way.</p>
+              </div>
+            </div>
+            <div class="card pad-sm titem">
+              <div class="twhen">2025</div>
+              <div class="twhat">
+                <h3>First full‑stack apps</h3>
+                <p>Learned to connect UI, APIs, and databases—then made it feel good to use.</p>
+              </div>
+            </div>
+            <div class="card pad-sm titem">
+              <div class="twhen">2024</div>
+              <div class="twhat">
+                <h3>Found my spark</h3>
+                <p>Discovered the joy of turning curiosity into real prototypes and tools.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact" class="section">
+      <div class="container">
+        <div class="grid-2">
+          <div class="card pad">
+            <h2>Contact</h2>
+            <p>Want to collaborate, chat, or share feedback? Send a message.</p>
+
+            <form class="form" id="contactForm">
+              <div>
+                <label for="name">Name</label>
+                <input id="name" name="name" placeholder="Your name" autocomplete="name" />
+              </div>
+              <div>
+                <label for="email">Email</label>
+                <input id="email" name="email" type="email" placeholder="you@example.com" autocomplete="email" />
+              </div>
+              <div>
+                <label for="message">Message</label>
+                <textarea id="message" name="message" placeholder="What are we building together?"></textarea>
+              </div>
+              <div class="actions">
+                <button class="pill primary" type="submit">Send (demo)</button>
+                <a class="pill" href="mailto:hello@example.com">Email me</a>
+                <a class="pill" href="#" aria-label="Your GitHub (replace link)">GitHub</a>
+                <a class="pill" href="#" aria-label="Your LinkedIn (replace link)">LinkedIn</a>
+              </div>
+              <p id="formNote" class="small" style="margin: 6px 0 0;">
+                This form sends to a local backend when you run the server.
+              </p>
+            </form>
+          </div>
+
+          <div class="card pad">
+            <h2>Quick edits</h2>
+            <ul class="list">
+              <li><strong>Change name:</strong> replace “Ada Tech” in the header + title.</li>
+              <li><strong>Add your links:</strong> update the “Live/Code” and social links.</li>
+              <li><strong>Swap projects:</strong> edit the cards in the “Featured projects” section.</li>
+              <li><strong>Add a photo:</strong> replace the avatar card with an <code>&lt;img&gt;</code>.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      <div class="card pad-sm">
+        <div style="display:flex; align-items:center; justify-content:space-between; gap:12px; flex-wrap:wrap;">
+          <div class="small">
+            © <span id="year"></span> Ada Tech • Built with HTML/CSS/JS
+          </div>
+          <div class="small">
+            <a href="#top">Back to top</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    (function () {
+      const root = document.documentElement;
+      const btn = document.getElementById("themeBtn");
+      const year = document.getElementById("year");
+      const form = document.getElementById("contactForm");
+      const note = document.getElementById("formNote");
+
+      year.textContent = new Date().getFullYear();
+
+      function setTheme(theme) {
+        root.setAttribute("data-theme", theme);
+        try { localStorage.setItem("theme", theme); } catch (_) {}
+      }
+
+      function getSavedTheme() {
+        try { return localStorage.getItem("theme"); } catch (_) { return null; }
+      }
+
+      const saved = getSavedTheme();
+      if (saved === "light" || saved === "dark") setTheme(saved);
+
+      btn.addEventListener("click", () => {
+        const current = root.getAttribute("data-theme");
+        setTheme(current === "light" ? "dark" : "light");
+      });
+
+      document.addEventListener("keydown", (e) => {
+        if (e.key.toLowerCase() === "t" && !(e.ctrlKey || e.metaKey || e.altKey)) {
+          const active = document.activeElement;
+          const isTyping = active && (active.tagName === "INPUT" || active.tagName === "TEXTAREA");
+          if (!isTyping) btn.click();
+        }
+      });
+
+      // Smooth scroll without breaking reduced motion
+      document.addEventListener("click", (e) => {
+        const a = e.target && e.target.closest ? e.target.closest('a[href^="#"]') : null;
+        if (!a) return;
+        const id = a.getAttribute("href").slice(1);
+        const el = document.getElementById(id);
+        if (!el) return;
+        e.preventDefault();
+        el.scrollIntoView({ behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth" });
+        history.pushState(null, "", "#" + id);
+      });
+
+      // Contact form: sends to backend and saves messages on disk
+      form.addEventListener("submit", (e) => {
+        e.preventDefault();
+        const name = document.getElementById("name").value.trim();
+        const email = document.getElementById("email").value.trim();
+        const msg = document.getElementById("message").value.trim();
+
+        const isEmail = (value) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
+        if (!name) {
+          note.textContent = "Please enter your name.";
+          return;
+        }
+        if (!isEmail(email)) {
+          note.textContent = "Please enter a valid email address.";
+          return;
+        }
+        if (!msg) {
+          note.textContent = "Please write a message.";
+          return;
+        }
+
+        const submitBtn = form.querySelector('button[type="submit"]');
+        const prevBtnText = submitBtn ? submitBtn.textContent : "";
+        if (submitBtn) {
+          submitBtn.disabled = true;
+          submitBtn.textContent = "Sending…";
+        }
+        note.textContent = "Sending your message…";
+
+        fetch("/api/contact", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ name, email, message: msg })
+        })
+          .then(async (res) => {
+            const data = await res.json().catch(() => ({}));
+            if (!res.ok) throw new Error(data && data.error ? data.error : "Failed to send.");
+            return data;
+          })
+          .then(() => {
+            form.reset();
+            note.textContent = "Message sent! I’ll get back to you soon.";
+          })
+          .catch((err) => {
+            note.textContent = err && err.message ? err.message : "Something went wrong sending your message.";
+          })
+          .finally(() => {
+            if (submitBtn) {
+              submitBtn.disabled = false;
+              submitBtn.textContent = prevBtnText || "Send";
+            }
+          });
+      });
+    })();
+  </script>
+</body>
+</html>
